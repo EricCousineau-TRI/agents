@@ -172,7 +172,7 @@ def future_in_eager_mode(func_or_method):
   return tf_decorator.make_decorator(func_or_method, decorator)
 
 
-def add_variables_summaries(grads_and_vars, step):
+def add_variables_summaries(grads_and_vars, step, buckets=None):
   """Add summaries for variables.
 
   Args:
@@ -187,7 +187,7 @@ def add_variables_summaries(grads_and_vars, step):
         var_values = var
       var_name = var.name.replace(':', '_')
       tf.compat.v2.summary.histogram(
-          name=var_name + '_value', data=var_values, step=step)
+          name=var_name + '_value', data=var_values, step=step, buckets=None)
       tf.compat.v2.summary.scalar(
           name=var_name + '_value_norm',
           data=tf.linalg.global_norm([var_values]),
@@ -210,7 +210,7 @@ def add_gradients_summaries(grads_and_vars, step):
           grad_values = grad
         var_name = var.name.replace(':', '_')
         tf.compat.v2.summary.histogram(
-            name=var_name + '_gradient', data=grad_values, step=step)
+            name=var_name + '_gradient', data=grad_values, step=step, buckets=None)
         tf.compat.v2.summary.scalar(
             name=var_name + '_gradient_norm',
             data=tf.linalg.global_norm([grad_values]),

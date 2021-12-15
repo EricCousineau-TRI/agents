@@ -307,10 +307,10 @@ if __name__ == '__main__':
   # improvement over using `sys.argv` and then `sys.argv.remove`, which also
   # did not provide help about custom arguments.
   parser = argparse.ArgumentParser(add_help=False)
-  parser.add_argument(
-      '--release',
-      action='store_true',
-      help='Pass as true to do a release build')
+  # parser.add_argument(
+  #     '--release',
+  #     action='store_true',
+  #     help='Pass as true to do a release build')
   parser.add_argument(
       '--tf-version',
       type=str,
@@ -334,6 +334,7 @@ if __name__ == '__main__':
       default='broken_tests.txt',
       help='Broken tests file to use.')
   FLAGS, unparsed = parser.parse_known_args()
+  FLAGS.release = True
   # Go forward with only non-custom flags.
   sys.argv.clear()
   # Downstream `setuptools.setup` expects args to start at the second element.

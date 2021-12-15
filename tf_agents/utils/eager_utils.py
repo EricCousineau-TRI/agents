@@ -185,7 +185,7 @@ def add_variables_summaries(grads_and_vars, step, buckets=None):
         var_values = var.values
       else:
         var_values = var
-      var_name = var.name.replace(':', '_')
+      var_name = var.name.replace(':', '_').replace("/", ".")
       tf.compat.v2.summary.histogram(
           name=var_name + '_value', data=var_values, step=step, buckets=None)
       tf.compat.v2.summary.scalar(
@@ -208,7 +208,7 @@ def add_gradients_summaries(grads_and_vars, step):
           grad_values = grad.values
         else:
           grad_values = grad
-        var_name = var.name.replace(':', '_')
+        var_name = var.name.replace(':', '_').replace("/", ".")
         tf.compat.v2.summary.histogram(
             name=var_name + '_gradient', data=grad_values, step=step, buckets=None)
         tf.compat.v2.summary.scalar(

@@ -188,10 +188,10 @@ def add_variables_summaries(grads_and_vars, step, buckets=None):
       var_name = var.name.replace(':', '_').replace("/", ".")
       tf.compat.v2.summary.histogram(
           name=var_name + '_value', data=var_values, step=step, buckets=None)
-      tf.compat.v2.summary.scalar(
-          name=var_name + '_value_norm',
-          data=tf.linalg.global_norm([var_values]),
-          step=step)
+      # tf.compat.v2.summary.scalar(
+      #     name=var_name + '_value_norm',
+      #     data=tf.linalg.global_norm([var_values]),
+      #     step=step)
 
 
 def add_gradients_summaries(grads_and_vars, step):
@@ -211,10 +211,10 @@ def add_gradients_summaries(grads_and_vars, step):
         var_name = var.name.replace(':', '_').replace("/", ".")
         tf.compat.v2.summary.histogram(
             name=var_name + '_gradient', data=grad_values, step=step, buckets=None)
-        tf.compat.v2.summary.scalar(
-            name=var_name + '_gradient_norm',
-            data=tf.linalg.global_norm([grad_values]),
-            step=step)
+        # tf.compat.v2.summary.scalar(
+        #     name=var_name + '_gradient_norm',
+        #     data=tf.linalg.global_norm([grad_values]),
+        #     step=step)
       else:
         logging.info('Var %s has no gradient', var.name)
 
